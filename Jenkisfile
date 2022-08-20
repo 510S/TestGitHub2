@@ -6,9 +6,12 @@ pipeline { // Declarative pipelineであることを宣言する
   tools {
     maven "M3"
   }
+  // Mavenのビルドステップ
+  // https://korattablog.com/2020/10/08/maven-architecture/
   stages{
     stage("checkout git") {
       steps{
+        echo "Start checkout git!"
         dir("${WORKSPACE}") {
           git url: "${gitUrl}", branch: "${targetBranch}", credentialsId: "${ChocolateJenkins}"
           sh "ls -la"
@@ -16,6 +19,7 @@ pipeline { // Declarative pipelineであることを宣言する
       }
     }
 
+	/*
     stage("Lint") {
       steps{
         dir("${WORKSPACE}") {
@@ -23,27 +27,42 @@ pipeline { // Declarative pipelineであることを宣言する
         }
       }
     }
+    */
 
     stage("Unit Test") {
       steps{
+        echo "Start Unit Test!"
         dir("${WORKSPACE}") {
-          //withMaven( maven: "M3") {
-            sh "mvn test"
-          //}
+          sh "mvn test"
         }
       }
     }
 
     stage("build") {
       steps{
+        echo "Start build!"
         dir("${WORKSPACE}") {
-          //withMaven( maven: "M3") {
-            sh "mvn install"
-          //}
+          sh "mvn install"
         }
       }
+      post{
+        //常に実行
+        always{
+          echo "========End build!========"
+        }
+        //成功時
+        success{
+          echo "========Success!!========"
+        }
+        //失敗時
+        failure{
+          echo "========Fail……========"
+        }
+      }
+
     }
 
+	/*
     stage("Integration Test") {
       steps{
         dir("${WORKSPACE}") {
@@ -57,6 +76,7 @@ pipeline { // Declarative pipelineであることを宣言する
         println("deploy delicious chocolate!!")
       }
     }
+    */
   }
   post{
     always{
