@@ -3,7 +3,9 @@ def targetBranch = "master"
 def ChocolateJenkins = "git"
 pipeline { // Declarative pipelineであることを宣言する
   agent any // 環境の指定（anyなので指定なし）
-
+  tools {
+    maven "M3"
+  }
   stages{
     stage("checkout git") {
       steps{
@@ -25,9 +27,9 @@ pipeline { // Declarative pipelineであることを宣言する
     stage("Unit Test") {
       steps{
         dir("${WORKSPACE}") {
-          withMaven( maven: "M3") {
+          //withMaven( maven: "M3") {
             sh "mvn test"
-          }
+          //}
         }
       }
     }
@@ -35,9 +37,9 @@ pipeline { // Declarative pipelineであることを宣言する
     stage("build") {
       steps{
         dir("${WORKSPACE}") {
-          withMaven( maven: "M3") {
+          //withMaven( maven: "M3") {
             sh "mvn install"
-          }
+          //}
         }
       }
     }
