@@ -5,43 +5,54 @@ pipeline { // Declarative pipelineであることを宣言する
 
   stages{
     stage("checkout git") {
-      dir("${WORKSPACE}") {
+      steps{
+        dir("${WORKSPACE}") {
           git url: "${gitUrl}", branch: "${targetBranch}", credentialsId: "${ChocolateJenkins}"
           sh "ls -la"
+        }
       }
     }
 
     stage("Lint") {
-      dir("${WORKSPACE}") {
-        println("TODO: Add lint")
+      steps{
+        dir("${WORKSPACE}") {
+          println("TODO: Add lint")
+        }
       }
     }
 
     stage("Unit Test") {
-      dir("${WORKSPACE}") {
-        withMaven( maven: "M3") {
-          sh "mvn test"
+      steps{
+        dir("${WORKSPACE}") {
+          withMaven( maven: "M3") {
+            sh "mvn test"
+          }
         }
       }
     }
 
     stage("build") {
-      dir("${WORKSPACE}") {
-        withMaven( maven: "M3") {
-          sh "mvn install"
+      steps{
+        dir("${WORKSPACE}") {
+          withMaven( maven: "M3") {
+            sh "mvn install"
+          }
         }
       }
     }
 
     stage("Integration Test") {
-      dir("${WORKSPACE}") {
-        println("TODO: integration test")
+      steps{
+        dir("${WORKSPACE}") {
+          println("TODO: integration test")
+        }
       }
     }
 
-
     stage("deploy") {
-      println("deploy delicious chocolate!!")
+      steps{
+        println("deploy delicious chocolate!!")
+      }
     }
   }
   post{
