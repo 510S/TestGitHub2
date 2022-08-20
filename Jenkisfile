@@ -1,4 +1,4 @@
-def gitUrl = "git@github.com:atsushi510/TestGitHub2.git"
+def gitUrl = "git@GH510S:510S/TestGitHub2.git"
 def targetBranch = "master"
 def ChocolateJenkins = "git"
 pipeline { // Declarative pipelineであることを宣言する
