@@ -38,6 +38,7 @@ pipeline { // Declarative pipelineであることを宣言する
       steps{
         dir("${WORKSPACE}") {
           //withMaven( maven: "M3") {
+            cleanWs() // ワークスペース削除？
             sh "mvn install"
           //}
         }
