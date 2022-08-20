@@ -1,5 +1,6 @@
 def gitUrl = "git@github.com:atsushi510/TestGitHub2.git"
 def targetBranch = "master"
+def ChocolateJenkins = "git"
 pipeline { // Declarative pipelineであることを宣言する
   agent any // 環境の指定（anyなので指定なし）
 
