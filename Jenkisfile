@@ -1,7 +1,7 @@
+def gitUrl = "git@github.com:atsushi510/TestGitHub2.git"
+def targetBranch = "master"
 pipeline { // Declarative pipelineであることを宣言する
   agent any // 環境の指定（anyなので指定なし）
-  gitUrl = "git@github.com:atsushi510/TestGitHub2.git"
-  targetBranch = "master"
 
   stages{
       stage("checkout git") {
