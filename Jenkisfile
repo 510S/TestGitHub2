@@ -1,7 +1,16 @@
 pipeline { // Declarative pipelineであることを宣言する
   agent any // 環境の指定（anyなので指定なし）
+  def gitUrl = "git@github.com:atsushi510/TestGitHub2.git"
+  def targetBranch = "master"
+
   stages{
-  
+      stage("checkout git") {
+	      dir("${WORKSPACE}") {
+	          git url: "${gitUrl}", branch: "${targetBranch}", credentialsId: "${ChocolateJenkins}"
+	          sh "ls -la"
+	      }
+      }
+    
       stage("build") {
         steps{
           echo "Start build!"
