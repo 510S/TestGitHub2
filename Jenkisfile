@@ -1,26 +1,31 @@
 pipeline { // Declarative pipelineであることを宣言する
   agent any // 環境の指定（anyなので指定なし）
   stages{
-      stage("build"){
-          steps{
-            echo "Start build!"
-            mvn install
+  
+      stage("build") {
+        steps{
+          echo "Start build!"
+          dir("${WORKSPACE}") {
+            withMaven( maven: "M3") {
+              sh "mvn install"
+            }
           }
-          //ステップ終了処理
-          post{
-              //常に実行
-              always{
-                echo "========End build!========"
-              }
-              //成功時
-              success{
-                  echo "========Success!!========"
-              }
-              //失敗時
-              failure{
-                echo "========Fail……========"
-              }
+        }
+        //ステップ終了処理
+        post{
+          //常に実行
+          always{
+            echo "========End build!========"
           }
+          //成功時
+          success{
+              echo "========Success!!========"
+          }
+          //失敗時
+          failure{
+            echo "========Fail……========"
+          }
+        }
       }
       stage("check"){
         steps{
@@ -30,7 +35,7 @@ pipeline { // Declarative pipelineであることを宣言する
     }
   post{
     always{
-      //archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
+      archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
       echo "========Finish========"
     }
   }
