@@ -25,9 +25,9 @@ pipeline { // Declarative pipelineであることを宣言する
     stage("Unit Test") {
       steps{
         dir("${WORKSPACE}") {
-          withMaven( maven: "maven_3_5_2") {
+       //   withMaven( maven: "maven_3_5_2") {
             sh "mvn test"
-          }
+        //  }
         }
       }
     }
@@ -35,9 +35,9 @@ pipeline { // Declarative pipelineであることを宣言する
     stage("build") {
       steps{
         dir("${WORKSPACE}") {
-          withMaven( maven: "maven_3_5_2") {
+         // withMaven( maven: "maven_3_5_2") {
             sh "mvn install"
-          }
+        //  }
         }
       }
     }
