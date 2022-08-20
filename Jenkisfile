@@ -4,6 +4,7 @@ pipeline { // Declarative pipelineであることを宣言する
       stage("build"){
           steps{
             echo "Start build!"
+            mvn install
           }
           //ステップ終了処理
           post{
@@ -29,7 +30,7 @@ pipeline { // Declarative pipelineであることを宣言する
     }
   post{
     always{
-      archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
+      //archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
       echo "========Finish========"
     }
   }
