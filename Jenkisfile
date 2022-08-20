@@ -5,10 +5,12 @@ pipeline { // Declarative pipelineであることを宣言する
 
   stages{
       stage("checkout git") {
+        steps{
 	      dir("${WORKSPACE}") {
 	          git url: "${gitUrl}", branch: "${targetBranch}", credentialsId: "${ChocolateJenkins}"
 	          sh "ls -la"
 	      }
+        }
       }
     
       stage("build") {
