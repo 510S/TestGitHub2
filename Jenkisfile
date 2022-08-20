@@ -29,6 +29,7 @@ pipeline { // Declarative pipelineであることを宣言する
     }
   post{
     always{
+      archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
       echo "========Finish========"
     }
   }
