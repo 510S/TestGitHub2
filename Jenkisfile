@@ -33,7 +33,7 @@ pipeline { // Declarative pipelineであることを宣言する
       steps{
         echo "Start Unit Test!"
         dir("${WORKSPACE}") {
-          //sh "mvn test"
+          sh "mvn test"
         }
       }
     }
@@ -42,7 +42,7 @@ pipeline { // Declarative pipelineであることを宣言する
       steps{
         echo "Start build!"
         dir("${WORKSPACE}") {
-          //sh "mvn install"
+          sh "mvn install"
         }
       }
       post{
