@@ -80,6 +80,7 @@ pipeline { // Declarative pipelineであることを宣言する
   }
   post{
     always{
+      // 成果物を保存
       archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
       cleanWs() // ワークスペース削除？
       echo "========Finish========"
